@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 
 export const ShuffleClips = ( { setSequence, pageEvent } ) => {
+
+    const [selection, setSelection] = useState([]);
+    const [length, setLength] = useState([]);
 
     const videoclips = {"12yearsaslave": { 0: "12yearsaslave_756_778",
     1: "12yearsaslave_2231_2254",
@@ -104,11 +107,13 @@ export const ShuffleClips = ( { setSequence, pageEvent } ) => {
         8:"theusualsuspects_5384_5408",
         9:"theusualsuspects_5653_5673"}
     }
+
+    const clipLengths = {}
     
-    const selection = []
-    
-    for (let movie in videoclips) {
-        selection.push(videoclips[movie][Math.floor(Math.random()*9)])
+    const handleSelection = () => {
+        for (let movie in videoclips) {
+            selection.push(videoclips[movie][Math.floor(Math.random()*9)])
+        }
     }
     
     const shuffle = (array) => {
@@ -117,10 +122,19 @@ export const ShuffleClips = ( { setSequence, pageEvent } ) => {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-    shuffle(selection)
+
+    const handleDurations = () => {
+        selection.map(selection => { length.push(clipLengths[selection]) } );
+    }
+
+    useEffect( () => {
+        handleSelection();
+    }, [])
 
     useEffect( () => {
         const clockerooni = setInterval( () => {
+            shuffle(selection)
+            handleDurations();
             setSequence(selection);
             pageEvent();
         }, 2000);
@@ -129,9 +143,9 @@ export const ShuffleClips = ( { setSequence, pageEvent } ) => {
     }, [])
 
     return (
-        <>
+        <div className="container">
             <p>generating video selection ... </p>
-        </>
+        </div>
     )
 }
 

@@ -35,7 +35,7 @@ export const Experiment = ( { subID, sequence, pageEvent } ) => {
     }
 
     // TROUBLESHOOTING
-    console.log("progress:", progress, sequence[progress], sequence.length)
+    console.log("current clip:", sequence[progress], "list:", sequence)
 
     return (
         <>

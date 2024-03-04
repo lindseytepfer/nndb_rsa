@@ -32,7 +32,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
             </FormControl>
             
             <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Was there a social interaction prsent in the scene? </FormLabel>
+                <FormLabel id="demo-radio-buttons-group-label">Was there a social interaction present in the clip? </FormLabel>
                     <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q2} onChange={e => setQ2(e.target.value)} >
                         <FormLabel id="sidelabel" labelplacement="start">No </FormLabel>
                         <FormControlLabel value="no" control={<Radio />} labelPlacement='bottom'/>
@@ -44,7 +44,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
             { q2 == "yes" &&
                 <>
                     <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Was there an interpersonal conflict present in the scene? </FormLabel>
+                        <FormLabel id="demo-radio-buttons-group-label">How much interpersonal tension was in the scene? </FormLabel>
                             <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q3} onChange={e => setQ3(e.target.value)} >
                                 <FormLabel id="sidelabel" labelplacement="start">No </FormLabel>
                                 <FormControlLabel value="No" control={<Radio />} labelPlacement='bottom'/>
@@ -54,7 +54,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Was there interpersonal tension present in the scene? </FormLabel>
+                        <FormLabel id="demo-radio-buttons-group-label">How much conflict was in the scene? </FormLabel>
                             <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q4} onChange={e => setQ4(e.target.value)} >
                                 <FormLabel id="sidelabel" labelplacement="start">No </FormLabel>
                                 <FormControlLabel value="No" control={<Radio />} labelPlacement='bottom'/>
@@ -64,7 +64,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Was there violence present in the scene? </FormLabel>
+                        <FormLabel id="demo-radio-buttons-group-label">How much violence was in the scene? </FormLabel>
                             <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q5} onChange={e => setQ5(e.target.value)} >
                                 <FormLabel id="sidelabel" labelplacement="start">No </FormLabel>
                                 <FormControlLabel value="No" control={<Radio />} labelPlacement='bottom'/>
@@ -89,7 +89,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
 
             {
                 <div>
-                <button onClick={nextClip}>Next Clip</button>
+                <button className="advance-button" onClick={nextClip}>Next Clip</button>
                 </div>
             }
         </div>
