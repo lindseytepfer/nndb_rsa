@@ -11,6 +11,7 @@ const App = () => {
     const [subID, setSubID] = useState(0)
     const [pageState, setPageState] = useState(0);
     const [sequence, setSequence] = useState(null)
+    const [durations, setDurations] = useState(null)
 
     const nextPage = () => setPageState((prev) => prev + 1);
     
@@ -23,9 +24,9 @@ const App = () => {
                     case 1:
                         return <Intro pageEvent={nextPage} setSubID={setSubID} />
                     case 2:
-                        return <ShuffleClips pageEvent={nextPage} setSequence={setSequence} />
+                        return <ShuffleClips pageEvent={nextPage} setSequence={setSequence} setDurations={setDurations} />
                     case 3:
-                        return <Experiment subID={subID} pageEvent={nextPage} sequence={sequence} />
+                        return <Experiment subID={subID} pageEvent={nextPage} sequence={sequence} durations={durations}/>
                     case 4:
                         return <Debrief pageEvent={nextPage} />
                     default:
