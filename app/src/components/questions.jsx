@@ -2,43 +2,67 @@ import React, { useState, useEffect } from "react";
 import { RadioGroup, FormControl, FormLabel, FormControlLabel, Radio, Slider, Box } from "@mui/material";
 
 
-export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, setQ5, q6, setQ6, q7, setQ7, q8, setQ8, advanceClip, setPlayVideo } ) => {
-    const [showMore, setShowMore] = useState(false);
-    const [showButton, setShowButton] = useState(false);
+export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, setQ5, q6, setQ6, q7, setQ7, q8, setQ8, advanceClip, setPlayVideo, sendData } ) => {
+    const [batch, setBatch] = useState(1);
+    const [firstButton, setFirstButton] = useState(false);
+    const [secondButton, setSecondButton] = useState(false)
     const [showAlert, setShowAlert] = useState(false);
 
-    useEffect(()=>{
-        if (q4==='Yes') {
-            setShowMore(true);
-        } else {
-            if (q1 || q3 !== 0) {
-                setShowButton(true);
-            } else {
-                setShowAlert(true);
-            }
-        }
-    }, [q2])
-    
-    const handleChange = () => {
-        return
+    const clearRadios = () => {
+        setQ1(0);
+        setQ2(0);
+        setQ3(0);
+        setQ4(0);
+        setQ5(0);
+        setQ6(0);
+        setQ7(0);
+        setQ8(0);
     }
 
+    useEffect(() => {
+        if (q1 && q2 && q3 && q4 !== 0) {
+            setFirstButton(true);
+            setShowAlert(false);
+        } else {
+            setShowAlert(true);
+        }
+    }, [q1,q2,q3,q4])
+    
+    useEffect(()=>{
+        if (q5 && q6 && q7 && q8 !== 0) {
+            setShowAlert(false);
+            setSecondButton(true);
+        } else {
+            setShowAlert(true);
+        }
+    }, [q5,q6,q7,q8])
+
+
+    const handleSet = () => {
+        if (q4 === "yes") {
+            setBatch(2)
+        } else {
+            nextClip()
+        }
+    }
+    
     const nextClip = () => {
+        sendData()
+        setFirstButton(false);
+        setSecondButton(false);
+        setShowAlert(true);
+        clearRadios();
         advanceClip();
         setPlayVideo(true);
     }
 
     return(
     <>
-        <div>
+        <p className="color-headers" style={{fontSize:"1.5em"}}>Please answer a few questions about the clip you just watched:</p>
 
-        </div>
         
         <div className="radio-div">
-            <p>Please answer a few questions about the clip you just watched:</p>
-
-
-            { showMore === false &&
+            { batch === 1 &&
                 <>
                     <FormControl>
                         <FormLabel id="demo-radio-buttons-group-label">Have you ever seen this movie before? </FormLabel>
@@ -49,12 +73,10 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                                 <FormLabel id="sidelabel" labelplacement="end">Yes</FormLabel>
                             </RadioGroup>
                     </FormControl>
-                    
-                    <FormLabel id="demo-radio-buttons-group-label">Approximately how many characters were present in the scene overall?</FormLabel>
-                    
+
                     <FormControl>
                         <FormLabel id="demo-radio-buttons-group-label">How did the movie clip make you feel? </FormLabel>
-                            <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q3} onChange={e => setQ3(e.target.value)} >
+                            <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q2} onChange={e => setQ2(e.target.value)} >
                                 <FormLabel id="sidelabel" labelplacement="start">Very Negative </FormLabel>
                                 <FormControlLabel value="1" control={<Radio />} labelPlacement='bottom'/>
                                 <FormControlLabel value="2" control={<Radio />} labelPlacement='bottom'/>
@@ -67,6 +89,9 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                             </RadioGroup>
                     </FormControl>
 
+                    <FormLabel id="demo-radio-buttons-group-label">Approximately how many characters were present in the scene overall?</FormLabel>
+                    <input type="number" min="1" max="100" minlength="2" maxlength="2" value={q3} onChange={(e) => setQ3(e.target.value)}></input>
+
                     <FormControl>
                         <FormLabel id="demo-radio-buttons-group-label">Was there a social interaction present in the clip? </FormLabel>
                             <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q4} onChange={e => setQ4(e.target.value)} >
@@ -76,14 +101,20 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                                 <FormLabel id="sidelabel" labelplacement="end">Yes</FormLabel>
                             </RadioGroup>
                     </FormControl>
+
+                    { firstButton &&
+                        <>
+                        <button onClick={handleSet}>Next</button>
+                        </>
+                    }
                 </>
             }
-
-
             
-            { showMore == true &&
+            { batch == 2 &&
                 <>
-                    <FormLabel id="demo-radio-buttons-group-label">How many characters were in the scene were interacting?</FormLabel>
+                    <FormLabel id="demo-radio-buttons-group-label">Approximately how many characters were in the scene were interacting?</FormLabel>
+                    <input type="number" min="1" max="100" minlength="2" maxlength="2" value={q5} onChange={(e) => setQ5(e.target.value)}></input>
+
                     <FormControl>
                         <FormLabel id="demo-radio-buttons-group-label">How much interpersonal tension was in the scene? </FormLabel>
                             <RadioGroup className="radio-group" row aria-labelledby="demo-radio-buttons-group-label" value={q6} onChange={e => setQ6(e.target.value)} >
@@ -122,7 +153,7 @@ export const Questions = ( { q1, setQ1, q2, setQ2, q3, setQ3, q4, setQ4, q5, set
                 </>
             }
 
-            { showButton &&
+            { secondButton &&
                 <div>
                     <button className="advance-button" onClick={nextClip}>Next Clip</button>
                 </div>

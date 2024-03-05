@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Questions } from "./questions";
 
 export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
 
     const [progress, setProgress] = useState(0);
     const [playVideo, setPlayVideo] = useState(true);
@@ -14,9 +16,13 @@ export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
     const [q5, setQ5] = useState(0);
     const [q6, setQ6] = useState(0);
     const [q7, setQ7] = useState(0);
+    const [q8, setQ8] = useState(0);
 
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+    const sendData = () => {
+        return
+    }
+
+
 
     useEffect( () => {
         const clockerooni = setInterval( () => {
@@ -50,8 +56,8 @@ export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
 
             {playVideo === false && 
                 <>
-                    <Questions advanceClip={advanceClip} setPlayVideo={setPlayVideo} q1={q1} q2={q2} q3={q3} q4={q4} q5={q5} q6={q6} q7={q7}
-                    setQ1={setQ1} setQ2={setQ2} setQ3={setQ3} setQ4={setQ4} setQ5={setQ5} setQ6={setQ6} setQ7={setQ7}/>
+                    <Questions sendData={sendData} advanceClip={advanceClip} setPlayVideo={setPlayVideo} q1={q1} q2={q2} q3={q3} q4={q4} q5={q5} q6={q6} q7={q7} q8={q8}
+                    setQ1={setQ1} setQ2={setQ2} setQ3={setQ3} setQ4={setQ4} setQ5={setQ5} setQ6={setQ6} setQ7={setQ7} setQ8={setQ8}/>
                 </>
             }
         </>
