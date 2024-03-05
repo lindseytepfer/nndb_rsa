@@ -7,7 +7,7 @@ export const Consent = ( { pageEvent } ) => {
             <h1>CONSENT TO TAKE PART IN RESEARCH</h1>
             <h2>Dartmouth College</h2>
             <h3>Study Title: Online behavioral studies of interpersonal conflict</h3>
-            <h4>Principal Investigator: Mark Allen Thornton</h4>
+            <p><strong>Principal Investigator: Mark Allen Thornton</strong></p>
             <p> 
                 You are being asked to take part in a research study. Taking part in research is voluntary. 
             </p>
@@ -15,7 +15,7 @@ export const Consent = ( { pageEvent } ) => {
                 It is your choice whether or not to participate in this research.  If you choose to participate, you may change your mind and leave the study at any time.  Refusal to participate or stopping your participation will involve no penalty or loss of benefits to which you are otherwise entitled. If at any time before the completion of the study you close the experiment window or tab, this will be treated as withdrawn consent and any data you have provided will be discarded.
             </p>
             <p>
-                <strong>Study Summary: </strong><br/>
+                <strong>Study Summary</strong><br/>
                 This study aims to understand how people narrate the interpersonal conflicts in their lives, and what type of feedback, or responses, they want to receive from listeners. Importantly, the narratives collected from this study will be later transcribed, deidentified/anonymized and re-presented to future participants as text. This will allow us to later study how individuals understand and provide feedback on different types of interpersonal conflicts. 
                 <br/><br/>
                 The risk of participating in this study is minimal, no greater than what you would experience in the course of everyday internet use for an equivalent period of time. Your participation in this study is completely voluntary. You many choose not to participate. You may withdraw at any time during the study without penalty by simply closing this tab or window of your web browser.
@@ -59,9 +59,11 @@ export const Consent = ( { pageEvent } ) => {
             <h2>CONSENT</h2>  
             <p>By pressing the button below, you agree that:</p>
             <p>
+                <strong>
                 1. You agree to take part in this research.<br/>
                 2. You feel like you understand what you are agreeing to.<br/>
                 3. You know you are free to withdrawal at any time.<br/>
+                </strong>
             </p>
 
             <div>

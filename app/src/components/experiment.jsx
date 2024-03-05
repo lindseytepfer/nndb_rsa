@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Questions } from "./questions";
 
-export const Experiment = ( { subID, sequence, pageEvent } ) => {
+export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
 
     const [progress, setProgress] = useState(0);
     const [playVideo, setPlayVideo] = useState(true);
@@ -21,7 +21,7 @@ export const Experiment = ( { subID, sequence, pageEvent } ) => {
     useEffect( () => {
         const clockerooni = setInterval( () => {
             setPlayVideo(false);
-        }, 20000);
+        }, durations[progress]);
 
         return () => clearInterval(clockerooni);
     }, [progress])
@@ -35,7 +35,10 @@ export const Experiment = ( { subID, sequence, pageEvent } ) => {
     }
 
     // TROUBLESHOOTING
-    console.log("current clip:", sequence[progress], "list:", sequence)
+    console.log("current clip:", sequence[progress],
+     "duration:", durations[progress],
+     "sequence list length:", sequence.length,
+     "duration list length:",durations.length )
 
     return (
         <>
