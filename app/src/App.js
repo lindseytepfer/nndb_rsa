@@ -4,6 +4,7 @@ import { Consent } from "./components/consent";
 import { Intro } from "./components/intro";
 import { ShuffleClips } from './components/shuffleclips';
 import { Experiment } from "./components/experiment";
+import { Demographics } from './components/demo';
 import { Debrief } from "./components/debrief";
 
 
@@ -14,7 +15,7 @@ const App = () => {
     const [durations, setDurations] = useState(null)
 
     const nextPage = () => setPageState((prev) => prev + 1);
-    
+
     return (
         <div className="App">
             {(() => {
@@ -28,7 +29,9 @@ const App = () => {
                     case 3:
                         return <Experiment subID={subID} pageEvent={nextPage} sequence={sequence} durations={durations}/>
                     case 4:
-                        return <Debrief pageEvent={nextPage} />
+                        return <Demographics pageEvent={nextPage} subID={subID} />
+                    case 5: 
+                        return <Debrief />
                     default:
                         return null;
                 }
