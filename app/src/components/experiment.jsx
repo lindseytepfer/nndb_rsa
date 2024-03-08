@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Questions } from "./questions";
+import { db, storage } from "../config/firebase.js"
+import { addDoc, collection } from 'firebase/firestore';
+
 
 export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
     var w = window.innerWidth;
@@ -17,12 +20,36 @@ export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
     const [q6, setQ6] = useState(0);
     const [q7, setQ7] = useState(0);
     const [q8, setQ8] = useState(0);
+    
+    //cloud research paramters
+    const queryParameters = new URLSearchParams(window.location.search)
+    const participantID = queryParameters.get("participantId")
+    const assignmentID = queryParameters.get("assignmentId")
+    const projectID = queryParameters.get("projectId")
 
-    const sendData = () => {
-        return
+    const dataCollectionRef = collection(db, "responses")
+
+    const sendData = async () => {
+        try {
+            await addDoc(dataCollectionRef, {
+                userID: subID,
+                connectID: participantID,
+                assignmentID: assignmentID,
+                projectID: projectID,
+                movieID: sequence[progress],
+                q1: q1,
+                q2: q2,
+                q3: q3,
+                q4: q4,
+                q5: q5,
+                q6: q6,
+                q7: q7,
+                q8: q8,
+        });
+        } catch (err) {
+            console.error(err)
+        }
     }
-
-
 
     useEffect( () => {
         const clockerooni = setInterval( () => {
@@ -41,16 +68,13 @@ export const Experiment = ( { subID, sequence, durations, pageEvent } ) => {
     }
 
     // TROUBLESHOOTING
-    console.log("current clip:", sequence[progress],
-     "duration:", durations[progress],
-     "sequence list length:", sequence.length,
-     "duration list length:",durations.length )
+    console.log("current clip:", sequence[progress], "responses:", q1,q2,q3,q4,q5,q6,q7,q8 )
 
     return (
         <>
             { playVideo === true &&
                 <>
-                    <video src={`/movie_clips/${sequence[progress]}.mp4`} width={w-5} height={h-5} autoPlay>Unable to load video.</video>
+                    <video src={`https://firebasestorage.googleapis.com/v0/b/media-conflict.appspot.com/o/${sequence[progress]}.mp4?alt=media`} width={w-5} height={h-5} autoPlay>Unable to load video.</video>
                 </>
             }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 
 export const ShuffleClips = ( { setSequence, setDurations, pageEvent } ) => {
@@ -227,22 +227,20 @@ export const ShuffleClips = ( { setSequence, setDurations, pageEvent } ) => {
         selection.map(selection => { length.push(clipLengths[selection]) } );
     }
 
-    useEffect( () => {
-        const clockerooni = setInterval( () => {
-            handleSelection();
-            shuffle(selection);
-            handleDurations();
-            setDurations(length);
-            setSequence(selection);
-            pageEvent();
-        }, 2000);
-
-        return () => clearInterval(clockerooni);
-    }, [])
+    const startTask = () => {
+        handleSelection();
+        shuffle(selection);
+        handleDurations();
+        setDurations(length);
+        setSequence(selection);
+        pageEvent();
+    }
 
     return (
         <div className="container">
-            <p>generating video selection ... </p>
+            <h1> Make sure your volume is turned on,<br/> and headphones if you need them! </h1>
+            <p>When you are ready, press "start" to play the first video:</p>
+            <button className='advance-button' onClick={startTask}>start</button>
         </div>
     )
 }

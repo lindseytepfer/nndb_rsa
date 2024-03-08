@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from 'uuid';
 
 export const Intro = ( { pageEvent, setSubID } ) => {
@@ -11,12 +11,17 @@ export const Intro = ( { pageEvent, setSubID } ) => {
 
     const handleClick = () => {
         setPart((prev) => prev + 1);
+        window.scrollTo({top: 0, behavior: 'smooth'})
     }
 
     const startExp = () => {
         setID();
         pageEvent();
     }
+
+    useEffect(()=>{
+        window.scrollTo({top: 0, behavior: 'smooth'})
+    },[])
 
     return (
         <>
