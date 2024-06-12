@@ -102,6 +102,12 @@ p {
   margin: 0px;
 }
 
+input {
+  width: 45px;
+  height: 25px;
+  font-size: larger;
+}
+
 /* Button Styling */
 .advance-button {
   background-color: #7a8c15;
