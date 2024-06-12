@@ -84,8 +84,8 @@ export const Demographics = ( { pageEvent, subID } ) => {
                 <FormControlLabel control={<Checkbox />} value="1" label="American Indian or Alaska Native" />
                 <FormControlLabel control={<Checkbox />} value="2" label="Black or African American" />
                 <FormControlLabel control={<Checkbox />} value="3" label="South Asian" />
-                <FormControlLabel control={<Checkbox />} value="4" label="South East Asain" />
-                <FormControlLabel control={<Checkbox />} value="5" label="East Asain" />
+                <FormControlLabel control={<Checkbox />} value="4" label="South East Asian" />
+                <FormControlLabel control={<Checkbox />} value="5" label="East Asian" />
                 <FormControlLabel control={<Checkbox />} value="6" label="Middle Eastern/North African" />
                 <FormControlLabel control={<Checkbox />} value="7" label="Native Hawaiian or Other Pacific Islander" />
                 <FormControlLabel control={<Checkbox />} value="8" label="White" />
